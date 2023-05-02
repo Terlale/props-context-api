@@ -1,17 +1,27 @@
-import React from 'react'
-import axios from "axios"
+import {React,useState,useContext} from "react";
+import { MainContext } from "../context/context";
 
-const Headers = ({data,setData}) => {
-    axios(`https://northwind.vercel.app/api/suppliers`).then(res=>{
-        console.log(res.data)
-    })
-    console.log(data)
+const Headers = () => {
+  const { name, surname, ab, setAb } = useContext(MainContext);
+  const [bgcolor, setColor] = useState("red");
+
+  const Change = () => {
+    setAb(ab === "Tarlala" ? "Terlale" : "Tarlala"); // ternary operator
+  };
+
+  const SwitchBG = () => {
+    setColor(bgcolor === "red" ? "blue" : "red");
+  };
   return (
-    <div>
-        
-      
+    <div style={{ height: 200, backgroundColor: bgcolor }}>
+      <p>{name}</p>
+      <p>{surname}</p>
+      <hr />
+      <h1>{ab}</h1>
+      <button onClick={Change}>Change</button>
+      <button onClick={SwitchBG}>Switch Background</button>
     </div>
-  )
-}
+  );
+};
 
-export default Headers
+export default Headers;
